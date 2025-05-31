@@ -16,20 +16,39 @@ public class Controller {
 
         try {
             String json = mapper.writeValueAsString(computer);
-            // dalej robisz coś z json, np. wysyłasz zapytanie
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(json))
                     .build();
 
-            // Tworzenie klienta HTTP i wysłanie zapytania
             HttpClient client = HttpClient.newHttpClient();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println("Response status code: " + response.statusCode());
             System.out.println("Response body: " + response.body());
 
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void endWork(Long computerId, String url) {
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(computerId.toString()))
+                    .build();
+
+            HttpClient client = HttpClient.newHttpClient();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("Response status code: " + response.statusCode());
+            System.out.println("Response body: " + response.body());
 
         } catch (Exception e) {
             e.printStackTrace();
