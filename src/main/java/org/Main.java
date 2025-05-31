@@ -1,23 +1,27 @@
 package org;
 
-import org.model.Computer;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Config conf = new Config();
 
-//        OnStart
-        Computer computer = new Computer("256a8dd8-7f1a-4dcc-b124-3e7e4d0f8e20", 1L);
-        String startUrl = "http://localhost:8080/startWork";
-        String endUrl = "http://localhost:8080/endWork";
-        Controller.startWork(computer, startUrl);
-
+//        onStart
+        Controller.startWork(conf.getComputer(), conf.getSartUrl());
 
 //        onStop
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            Controller.endWork(computer.getComputerId(), endUrl);
+            Controller.endWork(conf.getComputer().getComputerId(), conf.getEndUrl());
         }));
 
+        while(true) {
+            System.out.println("Type config to change configuration");
+            Scanner scanner = new Scanner(System.in);
+            if(scanner.nextLine().equals("config")) {
+                conf.changeConfig();
+            }
+        }
 
-        while (true) ;
+
     }
 }
