@@ -8,11 +8,11 @@ import java.util.Scanner;
 @Getter
 public class Config {
     private String url = "http://localhost:8080";
-    private final String start = "/startWork";
-    private String sartUrl = url + start;
-    private final String end = "/endWork";
+    private final String start = "/api/v1/usage/desktop/startWork";
+    private String startUrl = url + start;
+    private final String end = "/api/v1/usage/desktop/endWork";
     private String endUrl = url + end;
-    private Computer computer = new Computer("256a8dd8-7f1a-4dcc-b124-3e7e4d0f8e20",1L);
+    private Computer computer = new Computer("",1L);
 
     public Config(){
         loadFromFile("config.txt");
@@ -79,7 +79,7 @@ public class Config {
             String newUrl = scanner.nextLine();
             if(!newUrl.isEmpty()){
                 url = newUrl;
-                sartUrl = url + start;
+                startUrl = url + start;
                 endUrl = url + end;
             }
 

@@ -7,7 +7,7 @@ public class Main {
         Config conf = new Config();
 
 //        onStart
-        Controller.startWork(conf.getComputer(), conf.getSartUrl());
+        Controller.startWork(conf.getComputer(), conf.getStartUrl());
 
 //        onStop
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
